@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jadwal - RayzeWebAnime</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+        body {
+            background: #0b0b14;
+            color: #eee;
+            padding-bottom: 80px;
+        }
+        .header {
+            background: linear-gradient(145deg, #14141f, #1a1a2e);
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 2px solid #e94560;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        .header .back {
+            font-size: 24px;
+            color: #fff;
+            cursor: pointer;
+        }
+        .header h1 {
+            font-size: 20px;
+            font-weight: 700;
+        }
+        .container {
+            padding: 16px 18px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .day-tab {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            margin-bottom: 16px;
+            scrollbar-width: none;
+        }
+        .day-tab::-webkit-scrollbar {
+            display: none;
+        }
+        .day-tab .day-btn {
+            padding: 8px 18px;
+            background: #161621;
+            border: 1px solid #26263a;
+            border-radius: 30px;
+            color: #8888aa;
+            font-size: 13px;
+            font-weight: 600;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+        .day-tab .day-btn.active {
+            background: #e94560;
+            color: #fff;
+            border-color: #e94560;
+        }
+
+        .schedule-item {
+            background: #161621;
+            border-radius: 12px;
+            padding: 14px 16px;
+            margin-bottom: 10px;
+            border-left: 4px solid #e94560;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .schedule-item .time {
+            font-size: 14px;
+            font-weight: 700;
+            color: #ffd93d;
+            min-width: 50px;
+        }
+        .schedule-item .info {
+            flex: 1;
+        }
+        .schedule-item .info h4 {
+            font-size: 15px;
+            font-weight: 600;
+        }
+        .schedule-item .info p {
+            font-size: 12px;
+            color: #8888aa;
+        }
+        .schedule-item .badge {
+            background: #2a2a4a;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #12121e;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0 14px;
+            border-top: 1px solid #26263a;
+            z-index: 999;
+        }
+        .bottom-nav a {
+            color: #555577;
+            text-align: center;
+            font-size: 11px;
+            font-weight: 500;
+            text-decoration: none;
+        }
+        .bottom-nav a .icon {
+            display: block;
+            font-size: 24px;
+            margin-bottom: 2px;
+        }
+        .bottom-nav a.active {
+            color: #e94560;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <span class="back" onclick="history.back()">‹</span>
+        <h1>📅 Jadwal Tayang</h1>
+    </div>
+
+    <div class="container">
+
+        <div class="day-tab">
+            <span class="day-btn active">Senin</span>
+            <span class="day-btn">Selasa</span>
+            <span class="day-btn">Rabu</span>
+            <span class="day-btn">Kamis</span>
+            <span class="day-btn">Jumat</span>
+            <span class="day-btn">Sabtu</span>
+            <span class="day-btn">Minggu</span>
+        </div>
+
+        <div id="scheduleList">
+            <div class="schedule-item">
+                <div class="time">15:00</div>
+                <div class="info">
+                    <h4>One Piece</h4>
+                    <p>Episode 1175 · Petualangan Luffy</p>
+                </div>
+                <span class="badge">🔥 Terbaru</span>
+            </div>
+            <div class="schedule-item">
+                <div class="time">17:30</div>
+                <div class="info">
+                    <h4>Jujutsu Kaisen</h4>
+                    <p>Episode 47 · Pertarungan melawan kutukan</p>
+                </div>
+                <span class="badge">⭐ Populer</span>
+            </div>
+            <div class="schedule-item">
+                <div class="time">19:00</div>
+                <div class="info">
+                    <h4>Black Clover</h4>
+                    <p>Episode 170 · Petualangan Asta</p>
+                </div>
+                <span class="badge">📺 Ongoing</span>
+            </div>
+            <div class="schedule-item">
+                <div class="time">20:30</div>
+                <div class="info">
+                    <h4>Demon Slayer</h4>
+                    <p>Episode 55 · Pertarungan melawan iblis</p>
+                </div>
+                <span class="badge">⚡ Update</span>
+            </div>
+            <div class="schedule-item">
+                <div class="time">22:00</div>
+                <div class="info">
+                    <h4>Solo Leveling</h4>
+                    <p>Episode 12 · Hunter leveling</p>
+                </div>
+                <span class="badge">🆕 Baru</span>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="bottom-nav">
+        <a href="index.html">
+            <span class="icon">🏠</span> Home
+        </a>
+        <a href="anime.html">
+            <span class="icon">📺</span> Anime
+        </a>
+        <a href="jadwal.html" class="active">
+            <span class="icon">📅</span> Jadwal
+        </a>
+        <a href="chat.html">
+            <span class="icon">💬</span> Chat
+        </a>
+        <a href="profil.html">
+            <span class="icon">👤</span> Profil
+        </a>
+    </div>
+
+</body>
+</html>
