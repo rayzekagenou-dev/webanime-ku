@@ -72,7 +72,7 @@
     .profile-card .badges {
       margin: 12px 0;
     }
-    .profile-card .badges .admin-badge {
+    .profile-card .badge-admin {
       background: #ff1744;
       color: #fff;
       padding: 4px 16px;
@@ -81,10 +81,22 @@
       font-weight: 700;
       display: inline-block;
       margin: 4px;
+      box-shadow: 0 0 20px rgba(255, 23, 68, 0.5);
     }
-    .profile-card .badges .premium-badge {
+    .profile-card .badge-premium {
       background: #00d4ff;
       color: #000;
+      padding: 4px 16px;
+      border-radius: 30px;
+      font-size: 12px;
+      font-weight: 700;
+      display: inline-block;
+      margin: 4px;
+      box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+    }
+    .profile-card .badge-normal {
+      background: #2a2a4a;
+      color: #888;
       padding: 4px 16px;
       border-radius: 30px;
       font-size: 12px;
@@ -144,6 +156,23 @@
       font-size: 18px;
     }
 
+    .logout-btn {
+      width: 100%;
+      padding: 14px;
+      background: #ff1744;
+      border: none;
+      border-radius: 12px;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 16px;
+      transition: 0.2s;
+    }
+    .logout-btn:active {
+      transform: scale(0.97);
+    }
+
     .bottom-nav {
       position: fixed;
       bottom: 0;
@@ -181,101 +210,99 @@
 
   <div class="container">
 
-    <div class="profile-card">
-      <div class="avatar">R</div>
-      <h2>Rayze ✨ ライゼ</h2>
-      <div class="tag">#777837 · Lvl. 334</div>
-      <div class="badges">
-        <span class="admin-badge">👑 ADMIN</span>
-        <span class="premium-badge">⭐ PREMIUM</span>
+    <div class="profile-card" id="profileCard">
+      <div class="avatar" id="avatarDisplay">R</div>
+      <h2 id="nameDisplay">Rayze ✨ ライゼ</h2>
+      <div class="tag" id="tagDisplay">#777837 · Lvl. 334</div>
+      <div class="badges" id="badgeDisplay">
+        <span class="badge-admin">👑 ADMIN</span>
+        <span class="badge-premium">⭐ PREMIUM</span>
       </div>
       <div class="stats">
-        <div>
-          <div class="num">20</div>
-          <div class="label">Hari</div>
-        </div>
-        <div>
-          <div class="num">47</div>
-          <div class="label">Komentar</div>
-        </div>
-        <div>
-          <div class="num">194</div>
-          <div class="label">Riwayat</div>
-        </div>
-        <div>
-          <div class="num">3514</div>
-          <div class="label">Menit</div>
-        </div>
+        <div><div class="num">20</div><div class="label">Hari</div></div>
+        <div><div class="num">47</div><div class="label">Komentar</div></div>
+        <div><div class="num">194</div><div class="label">Riwayat</div></div>
+        <div><div class="num">3514</div><div class="label">Menit</div></div>
       </div>
     </div>
 
-    <div class="menu-item">
-      <div class="left">
-        <span class="icon">🐾</span>
-        <span class="text">Peliharaan</span>
-      </div>
+    <div class="menu-item" onclick="window.location.href='histori.html'">
+      <div class="left"><span class="icon">📜</span><span class="text">Histori Nonton</span></div>
       <span class="arrow">›</span>
     </div>
 
-    <div class="menu-item">
-      <div class="left">
-        <span class="icon">❤️</span>
-        <span class="text">Afinitas</span>
-      </div>
+    <div class="menu-item" onclick="window.location.href='anime.html'">
+      <div class="left"><span class="icon">📺</span><span class="text">Daftar Anime</span></div>
       <span class="arrow">›</span>
     </div>
 
-    <div class="menu-item">
-      <div class="left">
-        <span class="icon">💬</span>
-        <span class="text">Komentar</span>
-      </div>
+    <div class="menu-item" onclick="window.location.href='jadwal.html'">
+      <div class="left"><span class="icon">📅</span><span class="text">Jadwal Tayang</span></div>
       <span class="arrow">›</span>
     </div>
 
-    <div class="menu-item">
-      <div class="left">
-        <span class="icon">⭐</span>
-        <span class="text">Favorit</span>
-      </div>
+    <div class="menu-item" onclick="window.location.href='chat.html'">
+      <div class="left"><span class="icon">💬</span><span class="text">Chat & Diskusi</span></div>
       <span class="arrow">›</span>
     </div>
 
-    <div class="menu-item">
-      <div class="left">
-        <span class="icon">📜</span>
-        <span class="text">Histori</span>
+    <!-- Tampilkan Admin Panel hanya untuk admin -->
+    <div id="adminMenu" style="display:none;">
+      <div class="menu-item" onclick="window.location.href='admin.html'" style="border-left:4px solid #ff1744;">
+        <div class="left"><span class="icon">👑</span><span class="text">Admin Panel</span></div>
+        <span class="arrow">›</span>
       </div>
-      <span class="arrow">›</span>
     </div>
 
-    <div class="menu-item">
-      <div class="left">
-        <span class="icon">⚙️</span>
-        <span class="text">Pengaturan</span>
-      </div>
-      <span class="arrow">›</span>
-    </div>
+    <button class="logout-btn" onclick="logout()">🚪 Logout</button>
 
   </div>
 
   <div class="bottom-nav">
-    <a href="index.html">
-      <span class="icon">🏠</span> Home
-    </a>
-    <a href="#">
-      <span class="icon">🔍</span> Cari
-    </a>
-    <a href="#">
-      <span class="icon">📅</span> Jadwal
-    </a>
-    <a href="#">
-      <span class="icon">💬</span> Chat
-    </a>
-    <a href="#" class="active">
-      <span class="icon">👤</span> Profil
-    </a>
+    <a href="index.html"><span class="icon">🏠</span> Home</a>
+    <a href="anime.html"><span class="icon">📺</span> Anime</a>
+    <a href="jadwal.html"><span class="icon">📅</span> Jadwal</a>
+    <a href="chat.html"><span class="icon">💬</span> Chat</a>
+    <a href="profil.html" class="active"><span class="icon">👤</span> Profil</a>
   </div>
 
+  <script>
+    function loadProfile() {
+      const user = JSON.parse(localStorage.getItem('currentUser'));
+
+      if (!user) {
+        window.location.href = 'login.html';
+        return;
+      }
+
+      document.getElementById('avatarDisplay').textContent = user.avatar || user.name.charAt(0);
+      document.getElementById('nameDisplay').textContent = user.name;
+      document.getElementById('tagDisplay').textContent = user.tag || '#000000 · Lvl. 1';
+
+      const badgeContainer = document.getElementById('badgeDisplay');
+      badgeContainer.innerHTML = '';
+
+      if (user.isAdmin) {
+        badgeContainer.innerHTML += `<span class="badge-admin">👑 ADMIN</span>`;
+        document.getElementById('adminMenu').style.display = 'block';
+      }
+      if (user.isPremium) {
+        badgeContainer.innerHTML += `<span class="badge-premium">⭐ PREMIUM</span>`;
+      }
+      if (!user.isAdmin && !user.isPremium) {
+        badgeContainer.innerHTML += `<span class="badge-normal">👤 MEMBER</span>`;
+      }
+    }
+
+    function logout() {
+      if (confirm('Yakin mau logout?')) {
+        localStorage.removeItem('currentUser');
+        window.location.href = 'login.html';
+      }
+    }
+
+    loadProfile();
+  </script>
+
 </body>
-</html>
+        </html>
