@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - RayzeWebAnime</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+    }
+    body {
+      background: #0b0b14;
+      color: #eee;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .login-box {
+      background: #161621;
+      border-radius: 24px;
+      padding: 40px 28px;
+      max-width: 400px;
+      width: 100%;
+      border: 1px solid #26263a;
+    }
+    .login-box .logo {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .login-box .logo h1 {
+      font-size: 28px;
+      font-weight: 800;
+    }
+    .login-box .logo h1 span {
+      color: #e94560;
+    }
+    .login-box .logo p {
+      color: #8888aa;
+      font-size: 13px;
+      margin-top: 4px;
+    }
+    .login-box label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #ccc;
+      margin-bottom: 4px;
+    }
+    .login-box input {
+      width: 100%;
+      padding: 14px 16px;
+      background: #0b0b14;
+      border: 1px solid #26263a;
+      border-radius: 12px;
+      color: #fff;
+      font-size: 15px;
+      margin-bottom: 16px;
+      outline: none;
+      transition: 0.2s;
+    }
+    .login-box input:focus {
+      border-color: #e94560;
+    }
+    .login-box .btn-login {
+      width: 100%;
+      padding: 14px;
+      background: #e94560;
+      border: none;
+      border-radius: 12px;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .login-box .btn-login:active {
+      transform: scale(0.97);
+    }
+    .login-box .divider {
+      text-align: center;
+      color: #555577;
+      font-size: 13px;
+      margin: 18px 0;
+    }
+    .login-box .btn-google {
+      width: 100%;
+      padding: 14px;
+      background: #1a1a2e;
+      border: 1px solid #26263a;
+      border-radius: 12px;
+      color: #eee;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .login-box .btn-google:active {
+      transform: scale(0.97);
+    }
+    .login-box .btn-google img {
+      width: 22px;
+    }
+    .login-box .tester {
+      text-align: center;
+      margin-top: 16px;
+      font-size: 13px;
+      color: #555577;
+    }
+    .login-box .tester a {
+      color: #e94560;
+      font-weight: 600;
+    }
+    .login-box .terms {
+      text-align: center;
+      font-size: 11px;
+      color: #555577;
+      margin-top: 20px;
+      line-height: 1.6;
+    }
+    .login-box .terms a {
+      color: #8888aa;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-box">
+    <div class="logo">
+      <h1>Rayze<span>WebAnime</span></h1>
+      <p>Platform anime untuk komunitas Indonesia</p>
+    </div>
+
+    <form id="loginForm">
+      <label>Username</label>
+      <input type="text" id="username" placeholder="Masukkan username" />
+
+      <label>Password</label>
+      <input type="password" id="password" placeholder="Masukkan password" />
+
+      <button type="button" class="btn-login" onclick="login()">🚀 Masuk</button>
+    </form>
+
+    <div class="divider">atau</div>
+
+    <button class="btn-google" onclick="loginGoogle()">
+      <span style="font-size:20px;">🔵</span> Lanjut dengan Google
+    </button>
+
+    <div class="tester">
+      <a href="#" onclick="testerLogin()">Masuk sebagai Tester</a>
+    </div>
+
+    <div class="terms">
+      Dengan masuk, kamu menyetujui <a href="#">ketentuan layanan</a>.<br />
+      Aplikasi ini tidak mengunggah atau mendistribusikan konten media.
+    </div>
+  </div>
+
+  <script>
+    function login() {
+      const user = document.getElementById('username').value;
+      const pass = document.getElementById('password').value;
+
+      if (user === 'admin' && pass === 'admin') {
+        alert('✅ Login sebagai ADMIN!');
+        window.location.href = 'admin.html';
+      } else if (user === 'rayze' && pass === 'rayze') {
+        alert('✅ Login sebagai PREMIUM!');
+        window.location.href = 'profil.html';
+      } else {
+        alert('❌ Username atau password salah!');
+      }
+    }
+
+    function loginGoogle() {
+      alert('🔵 Login dengan Google (coming soon)');
+    }
+
+    function testerLogin() {
+      alert('✅ Login sebagai Tester!');
+      window.location.href = 'index.html';
+    }
+  </script>
+
+</body>
+</html>
