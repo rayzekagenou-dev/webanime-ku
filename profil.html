@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profil - RayzeWebAnime</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+    }
+    body {
+      background: #0b0b14;
+      color: #eee;
+      padding-bottom: 80px;
+    }
+    .header {
+      background: linear-gradient(145deg, #14141f, #1a1a2e);
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 2px solid #e94560;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .header .back {
+      font-size: 24px;
+      color: #fff;
+      cursor: pointer;
+    }
+    .header h1 {
+      font-size: 20px;
+      font-weight: 700;
+    }
+    .container {
+      padding: 16px 18px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .profile-card {
+      background: #161621;
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+      border: 1px solid #26263a;
+      margin-bottom: 20px;
+    }
+    .profile-card .avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #e94560, #ff6b6b);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      font-weight: 700;
+      margin: 0 auto 12px;
+    }
+    .profile-card h2 {
+      font-size: 20px;
+    }
+    .profile-card .tag {
+      color: #8888aa;
+      font-size: 13px;
+    }
+    .profile-card .badges {
+      margin: 12px 0;
+    }
+    .profile-card .badges .admin-badge {
+      background: #ff1744;
+      color: #fff;
+      padding: 4px 16px;
+      border-radius: 30px;
+      font-size: 12px;
+      font-weight: 700;
+      display: inline-block;
+      margin: 4px;
+    }
+    .profile-card .badges .premium-badge {
+      background: #00d4ff;
+      color: #000;
+      padding: 4px 16px;
+      border-radius: 30px;
+      font-size: 12px;
+      font-weight: 700;
+      display: inline-block;
+      margin: 4px;
+    }
+    .profile-card .stats {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid #26263a;
+    }
+    .profile-card .stats div {
+      text-align: center;
+    }
+    .profile-card .stats .num {
+      font-size: 20px;
+      font-weight: 700;
+      color: #e94560;
+    }
+    .profile-card .stats .label {
+      font-size: 12px;
+      color: #8888aa;
+    }
+
+    .menu-item {
+      background: #161621;
+      border-radius: 12px;
+      padding: 16px 18px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border: 1px solid #1a1a2a;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .menu-item:active {
+      transform: scale(0.98);
+    }
+    .menu-item .left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .menu-item .left .icon {
+      font-size: 22px;
+    }
+    .menu-item .left .text {
+      font-size: 15px;
+      font-weight: 500;
+    }
+    .menu-item .arrow {
+      color: #555577;
+      font-size: 18px;
+    }
+
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #12121e;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0 14px;
+      border-top: 1px solid #26263a;
+      z-index: 999;
+    }
+    .bottom-nav a {
+      color: #555577;
+      text-align: center;
+      font-size: 11px;
+      font-weight: 500;
+    }
+    .bottom-nav a .icon {
+      display: block;
+      font-size: 24px;
+      margin-bottom: 2px;
+    }
+    .bottom-nav a.active {
+      color: #e94560;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <span class="back" onclick="history.back()">‹</span>
+    <h1>Profil</h1>
+  </div>
+
+  <div class="container">
+
+    <div class="profile-card">
+      <div class="avatar">R</div>
+      <h2>Rayze ✨ ライゼ</h2>
+      <div class="tag">#777837 · Lvl. 334</div>
+      <div class="badges">
+        <span class="admin-badge">👑 ADMIN</span>
+        <span class="premium-badge">⭐ PREMIUM</span>
+      </div>
+      <div class="stats">
+        <div>
+          <div class="num">20</div>
+          <div class="label">Hari</div>
+        </div>
+        <div>
+          <div class="num">47</div>
+          <div class="label">Komentar</div>
+        </div>
+        <div>
+          <div class="num">194</div>
+          <div class="label">Riwayat</div>
+        </div>
+        <div>
+          <div class="num">3514</div>
+          <div class="label">Menit</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <div class="left">
+        <span class="icon">🐾</span>
+        <span class="text">Peliharaan</span>
+      </div>
+      <span class="arrow">›</span>
+    </div>
+
+    <div class="menu-item">
+      <div class="left">
+        <span class="icon">❤️</span>
+        <span class="text">Afinitas</span>
+      </div>
+      <span class="arrow">›</span>
+    </div>
+
+    <div class="menu-item">
+      <div class="left">
+        <span class="icon">💬</span>
+        <span class="text">Komentar</span>
+      </div>
+      <span class="arrow">›</span>
+    </div>
+
+    <div class="menu-item">
+      <div class="left">
+        <span class="icon">⭐</span>
+        <span class="text">Favorit</span>
+      </div>
+      <span class="arrow">›</span>
+    </div>
+
+    <div class="menu-item">
+      <div class="left">
+        <span class="icon">📜</span>
+        <span class="text">Histori</span>
+      </div>
+      <span class="arrow">›</span>
+    </div>
+
+    <div class="menu-item">
+      <div class="left">
+        <span class="icon">⚙️</span>
+        <span class="text">Pengaturan</span>
+      </div>
+      <span class="arrow">›</span>
+    </div>
+
+  </div>
+
+  <div class="bottom-nav">
+    <a href="index.html">
+      <span class="icon">🏠</span> Home
+    </a>
+    <a href="#">
+      <span class="icon">🔍</span> Cari
+    </a>
+    <a href="#">
+      <span class="icon">📅</span> Jadwal
+    </a>
+    <a href="#">
+      <span class="icon">💬</span> Chat
+    </a>
+    <a href="#" class="active">
+      <span class="icon">👤</span> Profil
+    </a>
+  </div>
+
+</body>
+</html>
