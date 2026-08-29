@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Histori - RayzeWebAnime</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+        body {
+            background: #0b0b14;
+            color: #eee;
+            padding-bottom: 80px;
+        }
+        .header {
+            background: linear-gradient(145deg, #14141f, #1a1a2e);
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 2px solid #e94560;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        .header .back {
+            font-size: 24px;
+            color: #fff;
+            cursor: pointer;
+        }
+        .header h1 {
+            font-size: 20px;
+            font-weight: 700;
+        }
+        .header .clear-btn {
+            margin-left: auto;
+            background: #ff1744;
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 700;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+        }
+        .header .clear-btn:active {
+            transform: scale(0.95);
+        }
+        .container {
+            padding: 16px 18px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .history-empty {
+            text-align: center;
+            padding: 60px 20px;
+            color: #555577;
+        }
+        .history-empty .icon {
+            font-size: 64px;
+            margin-bottom: 16px;
+        }
+        .history-empty h3 {
+            color: #8888aa;
+            margin-bottom: 8px;
+        }
+
+        .history-item {
+            background: #161621;
+            border-radius: 12px;
+            padding: 14px 16px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            border: 1px solid #1a1a2a;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .history-item:active {
+            transform: scale(0.98);
+        }
+        .history-item .icon-box {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: #1a1a2e;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+        .history-item .info {
+            flex: 1;
+        }
+        .history-item .info h4 {
+            font-size: 15px;
+            font-weight: 600;
+        }
+        .history-item .info p {
+            font-size: 12px;
+            color: #8888aa;
+        }
+        .history-item .time {
+            font-size: 11px;
+            color: #555577;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #12121e;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0 14px;
+            border-top: 1px solid #26263a;
+            z-index: 999;
+        }
+        .bottom-nav a {
+            color: #555577;
+            text-align: center;
+            font-size: 11px;
+            font-weight: 500;
+            text-decoration: none;
+        }
+        .bottom-nav a .icon {
+            display: block;
+            font-size: 24px;
+            margin-bottom: 2px;
+        }
+        .bottom-nav a.active {
+            color: #e94560;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <span class="back" onclick="history.back()">‹</span>
+        <h1>📜 Histori</h1>
+        <button class="clear-btn" onclick="clearHistory()">🗑️ Hapus</button>
+    </div>
+
+    <div class="container" id="historyContainer">
+        <!-- Isi dari JavaScript -->
+    </div>
+
+    <div class="bottom-nav">
+        <a href="index.html">
+            <span class="icon">🏠</span> Home
+        </a>
+        <a href="anime.html">
+            <span class="icon">📺</span> Anime
+        </a>
+        <a href="jadwal.html">
+            <span class="icon">📅</span> Jadwal
+        </a>
+        <a href="chat.html">
+            <span class="icon">💬</span> Chat
+        </a>
+        <a href="profil.html">
+            <span class="icon">👤</span> Profil
+        </a>
+    </div>
+
+    <script>
+        const emojis = ['🏴‍☠️', '⚔️', '📖', '🍥', '👹', '🗡️', '🏰', '🤫', '⚡', '🐉', '🧙', '🦸'];
+
+        function renderHistory() {
+            const container = document.getElementById('historyContainer');
+            const history = JSON.parse(localStorage.getItem('animeHistory')) || [];
+
+            if (history.length === 0) {
+                container.innerHTML = `
+              <div class="history-empty">
+                <div class="icon">📭</div>
+                <h3>Belum ada histori</h3>
+                <p>Mulai nonton anime dulu ya!</p>
+              </div>
+            `;
+                return;
+            }
+
+            container.innerHTML = '';
+            history.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.className = 'history-item';
+                div.onclick = () => {
+                    alert(`📺 Nonton ${item.title} lagi? (redirect ke streaming)`);
+                };
+                const emoji = emojis[index % emojis.length];
+                div.innerHTML = `
+              <div class="icon-box">${emoji}</div>
+              <div class="info">
+                <h4>${item.title}</h4>
+                <p>${item.eps} Episode</p>
+              </div>
+              <div class="time">${item.time}</div>
+            `;
+                container.appendChild(div);
+            });
+        }
+
+        function clearHistory() {
+            if (confirm('Hapus semua histori?')) {
+                localStorage.removeItem('animeHistory');
+                renderHistory();
+            }
+        }
+
+        renderHistory();
+    </script>
+
+</body>
+</html>
