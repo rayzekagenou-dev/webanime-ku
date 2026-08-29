@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin - RayzeWebAnime</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+    }
+    body {
+      background: #0b0b14;
+      color: #eee;
+      padding-bottom: 80px;
+    }
+    .header {
+      background: linear-gradient(145deg, #14141f, #1a1a2e);
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 2px solid #e94560;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .header .back {
+      font-size: 24px;
+      color: #fff;
+      cursor: pointer;
+    }
+    .header h1 {
+      font-size: 20px;
+      font-weight: 700;
+    }
+    .header .admin-tag {
+      background: #ff1744;
+      padding: 4px 14px;
+      border-radius: 30px;
+      font-size: 11px;
+      font-weight: 700;
+      margin-left: auto;
+    }
+    .container {
+      padding: 16px 18px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .admin-card {
+      background: #161621;
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      border: 1px solid #26263a;
+    }
+    .admin-card .avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #2a2a4a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .admin-card .info {
+      flex: 1;
+    }
+    .admin-card .info h4 {
+      font-size: 15px;
+      font-weight: 600;
+    }
+    .admin-card .info p {
+      font-size: 12px;
+      color: #8888aa;
+    }
+    .admin-card .actions {
+      display: flex;
+      gap: 8px;
+    }
+    .admin-card .actions button {
+      padding: 6px 14px;
+      border: none;
+      border-radius: 30px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .btn-admin {
+      background: #ff1744;
+      color: #fff;
+    }
+    .btn-premium {
+      background: #00d4ff;
+      color: #000;
+    }
+    .btn-normal {
+      background: #2a2a4a;
+      color: #888;
+    }
+
+    .add-member {
+      background: #161621;
+      border-radius: 16px;
+      padding: 20px;
+      border: 2px dashed #26263a;
+      text-align: center;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+    .add-member:active {
+      transform: scale(0.98);
+    }
+    .add-member .icon {
+      font-size: 32px;
+    }
+    .add-member p {
+      color: #8888aa;
+      font-size: 14px;
+      margin-top: 4px;
+    }
+
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #12121e;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0 14px;
+      border-top: 1px solid #26263a;
+      z-index: 999;
+    }
+    .bottom-nav a {
+      color: #555577;
+      text-align: center;
+      font-size: 11px;
+      font-weight: 500;
+    }
+    .bottom-nav a .icon {
+      display: block;
+      font-size: 24px;
+      margin-bottom: 2px;
+    }
+    .bottom-nav a.active {
+      color: #e94560;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <span class="back" onclick="history.back()">‹</span>
+    <h1>Admin Panel</h1>
+    <span class="admin-tag">👑 ADMIN</span>
+  </div>
+
+  <div class="container">
+
+    <h3 style="color:#8888aa; font-size:14px; margin-bottom:12px;">📋 Daftar Member</h3>
+
+    <!-- MEMBER 1 - ADMIN -->
+    <div class="admin-card">
+      <div class="avatar" style="background:#ff1744;">R</div>
+      <div class="info">
+        <h4>Rayze ✨ ライゼ</h4>
+        <p>#777837 · Lvl. 334</p>
+      </div>
+      <div class="actions">
+        <button class="btn-admin" onclick="alert('✅ Sudah Admin')">👑 Admin</button>
+        <button class="btn-premium" onclick="alert('✅ Sudah Premium')">⭐ Premium</button>
+      </div>
+    </div>
+
+    <!-- MEMBER 2 - PREMIUM -->
+    <div class="admin-card">
+      <div class="avatar" style="background:#00d4ff;">F</div>
+      <div class="info">
+        <h4>flyCienu.</h4>
+        <p>#102938 · Lvl. 5.2K</p>
+      </div>
+      <div class="actions">
+        <button class="btn-normal" onclick="alert('✅ Jadi Admin!')">👑 Admin</button>
+        <button class="btn-premium" onclick="alert('✅ Sudah Premium')">⭐ Premium</button>
+      </div>
+    </div>
+
+    <!-- MEMBER 3 - NORMAL -->
+    <div class="admin-card">
+      <div class="avatar" style="background:#2a2a4a;">M</div>
+      <div class="info">
+        <h4>Maōu Dan</h4>
+        <p>#203948 · Lvl. 4.8K</p>
+      </div>
+      <div class="actions">
+        <button class="btn-normal" onclick="alert('✅ Jadi Admin!')">👑 Admin</button>
+        <button class="btn-normal" onclick="alert('✅ Jadi Premium!')">⭐ Premium</button>
+      </div>
+    </div>
+
+    <!-- MEMBER 4 - NORMAL -->
+    <div class="admin-card">
+      <div class="avatar" style="background:#2a2a4a;">N</div>
+      <div class="info">
+        <h4>nop</h4>
+        <p>#304857 · Lvl. 3.9K</p>
+      </div>
+      <div class="actions">
+        <button class="btn-normal" onclick="alert('✅ Jadi Admin!')">👑 Admin</button>
+        <button class="btn-normal" onclick="alert('✅ Jadi Premium!')">⭐ Premium</button>
+      </div>
+    </div>
+
+    <!-- MEMBER 5 - NORMAL -->
+    <div class="admin-card">
+      <div class="avatar" style="background:#2a2a4a;">R</div>
+      <div class="info">
+        <h4>Ranss</h4>
+        <p>#405867 · Lvl. 3.2K</p>
+      </div>
+      <div class="actions">
+        <button class="btn-normal" onclick="alert('✅ Jadi Admin!')">👑 Admin</button>
+        <button class="btn-normal" onclick="alert('✅ Jadi Premium!')">⭐ Premium</button>
+      </div>
+    </div>
+
+    <!-- MEMBER 6 - NORMAL -->
+    <div class="admin-card">
+      <div class="avatar" style="background:#2a2a4a;">F</div>
+      <div class="info">
+        <h4>flyKing</h4>
+        <p>#506978 · Lvl. 2.9K</p>
+      </div>
+      <div class="actions">
+        <button class="btn-normal" onclick="alert('✅ Jadi Admin!')">👑 Admin</button>
+        <button class="btn-normal" onclick="alert('✅ Jadi Premium!')">⭐ Premium</button>
+      </div>
+    </div>
+
+    <!-- TAMBAH MEMBER -->
+    <div class="add-member" onclick="alert('📝 Form tambah member (coming soon)')">
+      <div class="icon">➕</div>
+      <p>Tambah Member Baru</p>
+    </div>
+
+  </div>
+
+  <div class="bottom-nav">
+    <a href="index.html">
+      <span class="icon">🏠</span> Home
+    </a>
+    <a href="#">
+      <span class="icon">🔍</span> Cari
+    </a>
+    <a href="#">
+      <span class="icon">📅</span> Jadwal
+    </a>
+    <a href="#">
+      <span class="icon">💬</span> Chat
+    </a>
+    <a href="#" class="active">
+      <span class="icon">👤</span> Profil
+    </a>
+  </div>
+
+</body>
+</html>
