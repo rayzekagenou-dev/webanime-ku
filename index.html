@@ -9,7 +9,7 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      font-family: 'Segoe UI', system-ui, sans-serif;
     }
     body {
       background: #0b0b14;
@@ -21,7 +21,6 @@
       color: inherit;
     }
 
-    /* HEADER */
     .header {
       background: linear-gradient(145deg, #14141f, #1a1a2e);
       padding: 18px 20px;
@@ -46,11 +45,8 @@
       border-radius: 30px;
       font-size: 11px;
       font-weight: 700;
-      letter-spacing: 0.5px;
-      color: #fff;
     }
 
-    /* CONTAINER */
     .container {
       padding: 16px 18px;
       max-width: 800px;
@@ -67,6 +63,7 @@
       gap: 14px;
       border: 1px solid #26263a;
       margin-bottom: 20px;
+      cursor: pointer;
     }
     .user-card .avatar {
       width: 52px;
@@ -78,7 +75,6 @@
       justify-content: center;
       font-size: 24px;
       font-weight: 700;
-      color: #fff;
       flex-shrink: 0;
     }
     .user-card .info {
@@ -92,29 +88,38 @@
       font-size: 12px;
       color: #8888aa;
     }
-    .user-card .premium-badge {
-      background: #00d4ff;
-      color: #000;
-      padding: 4px 14px;
-      border-radius: 30px;
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 0.3px;
-      box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+    .user-card .badges {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
     }
-    .user-card .admin-badge {
+    .user-card .badge-admin {
       background: #ff1744;
       color: #fff;
       padding: 4px 14px;
       border-radius: 30px;
       font-size: 10px;
       font-weight: 800;
-      letter-spacing: 0.3px;
       box-shadow: 0 0 15px rgba(255, 23, 68, 0.4);
-      margin-right: 6px;
+    }
+    .user-card .badge-premium {
+      background: #00d4ff;
+      color: #000;
+      padding: 4px 14px;
+      border-radius: 30px;
+      font-size: 10px;
+      font-weight: 800;
+      box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+    }
+    .user-card .badge-normal {
+      background: #2a2a4a;
+      color: #888;
+      padding: 4px 14px;
+      border-radius: 30px;
+      font-size: 10px;
+      font-weight: 700;
     }
 
-    /* SECTION */
     .section-title {
       display: flex;
       justify-content: space-between;
@@ -132,7 +137,6 @@
       font-weight: 500;
     }
 
-    /* LEADERBOARD */
     .lb-item {
       display: flex;
       align-items: center;
@@ -159,7 +163,7 @@
       border-radius: 30px;
     }
 
-    /* ANIME CARD */
+    /* ANIME CARD - BISA DI-CLICK */
     .anime-card {
       background: #161621;
       border-radius: 14px;
@@ -169,10 +173,12 @@
       align-items: center;
       gap: 14px;
       border-left: 4px solid #e94560;
+      cursor: pointer;
       transition: 0.2s;
     }
     .anime-card:active {
-      transform: scale(0.98);
+      transform: scale(0.97);
+      background: #1e1e32;
     }
     .anime-card .rank {
       font-size: 20px;
@@ -204,31 +210,6 @@
       font-weight: 700;
     }
 
-    /* COMING SOON */
-    .coming-soon {
-      background: #161621;
-      border-radius: 16px;
-      padding: 30px 20px;
-      text-align: center;
-      border: 2px dashed #26263a;
-      margin: 24px 0;
-    }
-    .coming-soon h3 {
-      color: #e94560;
-      margin-bottom: 8px;
-      font-size: 18px;
-    }
-    .coming-soon p {
-      color: #8888aa;
-      font-size: 13px;
-    }
-    .coming-soon .dev {
-      margin-top: 10px;
-      font-size: 12px;
-      color: #555577;
-    }
-
-    /* BOTTOM NAV */
     .bottom-nav {
       position: fixed;
       bottom: 0;
@@ -246,7 +227,6 @@
       text-align: center;
       font-size: 11px;
       font-weight: 500;
-      transition: 0.2s;
     }
     .bottom-nav a .icon {
       display: block;
@@ -268,25 +248,23 @@
 </head>
 <body>
 
-  <!-- HEADER -->
   <div class="header">
     <h1>Rayze<span>WebAnime</span></h1>
     <span class="badge">🔥 BETA</span>
   </div>
 
-  <!-- CONTENT -->
   <div class="container">
 
-    <!-- USER CARD -->
-    <div class="user-card">
-      <div class="avatar">R</div>
+    <!-- USER CARD - Bisa di-klik ke login -->
+    <div class="user-card" onclick="window.location.href='login.html'">
+      <div class="avatar" id="avatarDisplay">R</div>
       <div class="info">
-        <h3>Rayze ✨ ライゼ</h3>
-        <p>#777837 · Lvl. 334</p>
+        <h3 id="usernameDisplay">Rayze ✨ ライゼ</h3>
+        <p id="userTagDisplay">#777837 · Lvl. 334</p>
       </div>
-      <div>
-        <span class="admin-badge">👑 ADMIN</span>
-        <span class="premium-badge">⭐ PREMIUM</span>
+      <div class="badges" id="badgeDisplay">
+        <span class="badge-admin">👑 ADMIN</span>
+        <span class="badge-premium">⭐ PREMIUM</span>
       </div>
     </div>
 
@@ -295,94 +273,46 @@
       <h2>🏆 TOP LEADERBOARD</h2>
       <a href="#">Lihat Semua</a>
     </div>
+    <div class="lb-item"><span class="rank-lb">#1</span><span class="name-lb">flyCienu.</span><span class="lv-lb">Lvl 5.2K</span></div>
+    <div class="lb-item"><span class="rank-lb">#2</span><span class="name-lb">Maōu Dan</span><span class="lv-lb">Lvl 4.8K</span></div>
+    <div class="lb-item"><span class="rank-lb">#3</span><span class="name-lb">nop</span><span class="lv-lb">Lvl 3.9K</span></div>
+    <div class="lb-item"><span class="rank-lb">#4</span><span class="name-lb">Ranss</span><span class="lv-lb">Lvl 3.2K</span></div>
+    <div class="lb-item"><span class="rank-lb">#5</span><span class="name-lb">flyKing</span><span class="lv-lb">Lvl 2.9K</span></div>
 
-    <div class="lb-item">
-      <span class="rank-lb">#1</span>
-      <span class="name-lb">flyCienu.</span>
-      <span class="lv-lb">Lvl 5.2K</span>
-    </div>
-    <div class="lb-item">
-      <span class="rank-lb">#2</span>
-      <span class="name-lb">Maōu Dan</span>
-      <span class="lv-lb">Lvl 4.8K</span>
-    </div>
-    <div class="lb-item">
-      <span class="rank-lb">#3</span>
-      <span class="name-lb">nop</span>
-      <span class="lv-lb">Lvl 3.9K</span>
-    </div>
-    <div class="lb-item">
-      <span class="rank-lb">#4</span>
-      <span class="name-lb">Ranss</span>
-      <span class="lv-lb">Lvl 3.2K</span>
-    </div>
-    <div class="lb-item">
-      <span class="rank-lb">#5</span>
-      <span class="name-lb">flyKing</span>
-      <span class="lv-lb">Lvl 2.9K</span>
-    </div>
-
-    <!-- POPULAR ANIME -->
+    <!-- POPULAR ANIME - BISA DI-CLICK -->
     <div class="section-title">
       <h2>🔥 Popular Anime</h2>
-      <a href="#">Lihat Semua</a>
+      <a href="anime.html">Lihat Semua</a>
     </div>
 
-    <div class="anime-card">
+    <div class="anime-card" onclick="window.open('https://otakudesu.org/anime/one-piece/', '_blank')">
       <div class="rank">1</div>
-      <div class="info">
-        <h4>One Piece</h4>
-        <p>Petualangan Luffy jadi Raja Bajak Laut</p>
-        <div class="eps">1175 Eps · Ongoing</div>
-      </div>
+      <div class="info"><h4>One Piece</h4><p>Petualangan Luffy jadi Raja Bajak Laut</p><div class="eps">1175 Eps · Ongoing</div></div>
       <div class="score">⭐ 9.2</div>
     </div>
 
-    <div class="anime-card">
+    <div class="anime-card" onclick="window.open('https://otakudesu.org/anime/bleach/', '_blank')">
       <div class="rank">2</div>
-      <div class="info">
-        <h4>Bleach</h4>
-        <p>Petualangan Ichigo menjadi Shinigami</p>
-        <div class="eps">366 Eps · Completed</div>
-      </div>
+      <div class="info"><h4>Bleach</h4><p>Petualangan Ichigo menjadi Shinigami</p><div class="eps">366 Eps · Completed</div></div>
       <div class="score">⭐ 8.7</div>
     </div>
 
-    <div class="anime-card">
+    <div class="anime-card" onclick="window.open('https://otakudesu.org/anime/black-clover/', '_blank')">
       <div class="rank">3</div>
-      <div class="info">
-        <h4>Black Clover</h4>
-        <p>Petualangan Asta jadi Magic Emperor</p>
-        <div class="eps">170 Eps · Ongoing</div>
-      </div>
+      <div class="info"><h4>Black Clover</h4><p>Petualangan Asta jadi Magic Emperor</p><div class="eps">170 Eps · Ongoing</div></div>
       <div class="score">⭐ 8.0</div>
     </div>
 
-    <div class="anime-card">
+    <div class="anime-card" onclick="window.open('https://otakudesu.org/anime/naruto-shippuden/', '_blank')">
       <div class="rank">4</div>
-      <div class="info">
-        <h4>Naruto Shippuden</h4>
-        <p>Kisah ninja dari desa Konoha</p>
-        <div class="eps">500 Eps · Completed</div>
-      </div>
+      <div class="info"><h4>Naruto Shippuden</h4><p>Kisah ninja dari desa Konoha</p><div class="eps">500 Eps · Completed</div></div>
       <div class="score">⭐ 8.9</div>
     </div>
 
-    <div class="anime-card">
+    <div class="anime-card" onclick="window.open('https://otakudesu.org/anime/jujutsu-kaisen/', '_blank')">
       <div class="rank">5</div>
-      <div class="info">
-        <h4>Jujutsu Kaisen</h4>
-        <p>Pertarungan melawan kutukan</p>
-        <div class="eps">47 Eps · Ongoing</div>
-      </div>
+      <div class="info"><h4>Jujutsu Kaisen</h4><p>Pertarungan melawan kutukan</p><div class="eps">47 Eps · Ongoing</div></div>
       <div class="score">⭐ 8.7</div>
-    </div>
-
-    <!-- COMING SOON -->
-    <div class="coming-soon">
-      <h3>⚡ Fitur Lainnya Segera Hadir</h3>
-      <p>Login, Premium, Chat, Riwayat &amp; lainnya</p>
-      <div class="dev">Developer: Rayze ✨</div>
     </div>
 
     <div class="footer-text">© 2026 RayzeWebAnime · Made with ❤️</div>
@@ -390,22 +320,35 @@
 
   <!-- BOTTOM NAV -->
   <div class="bottom-nav">
-    <a href="#" class="active">
-      <span class="icon">🏠</span> Home
-    </a>
-    <a href="#">
-      <span class="icon">🔍</span> Cari
-    </a>
-    <a href="#">
-      <span class="icon">📅</span> Jadwal
-    </a>
-    <a href="#">
-      <span class="icon">💬</span> Chat
-    </a>
-    <a href="#">
-      <span class="icon">👤</span> Profil
-    </a>
+    <a href="index.html" class="active"><span class="icon">🏠</span> Home</a>
+    <a href="anime.html"><span class="icon">📺</span> Anime</a>
+    <a href="jadwal.html"><span class="icon">📅</span> Jadwal</a>
+    <a href="chat.html"><span class="icon">💬</span> Chat</a>
+    <a href="profil.html"><span class="icon">👤</span> Profil</a>
   </div>
 
+  <script>
+    // Load user dari LocalStorage
+    function loadUser() {
+      const user = JSON.parse(localStorage.getItem('currentUser')) || null;
+      if (user) {
+        document.getElementById('usernameDisplay').textContent = user.name;
+        document.getElementById('userTagDisplay').textContent = user.tag;
+        document.getElementById('avatarDisplay').textContent = user.avatar || 'R';
+        const badgeContainer = document.getElementById('badgeDisplay');
+        badgeContainer.innerHTML = '';
+        if (user.isAdmin) {
+          badgeContainer.innerHTML += `<span class="badge-admin">👑 ADMIN</span>`;
+        }
+        if (user.isPremium) {
+          badgeContainer.innerHTML += `<span class="badge-premium">⭐ PREMIUM</span>`;
+        }
+        if (!user.isAdmin && !user.isPremium) {
+          badgeContainer.innerHTML += `<span class="badge-normal">👤 MEMBER</span>`;
+        }
+      }
+    }
+    loadUser();
+  </script>
 </body>
-</html>
+                                                                                   </html>
