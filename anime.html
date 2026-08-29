@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Daftar Anime - RayzeWebAnime</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+        body {
+            background: #0b0b14;
+            color: #eee;
+            padding-bottom: 80px;
+        }
+        .header {
+            background: linear-gradient(145deg, #14141f, #1a1a2e);
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 2px solid #e94560;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        .header .back {
+            font-size: 24px;
+            color: #fff;
+            cursor: pointer;
+        }
+        .header h1 {
+            font-size: 20px;
+            font-weight: 700;
+        }
+        .header .search-icon {
+            margin-left: auto;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        .container {
+            padding: 16px 18px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Filter */
+        .filter-bar {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 12px;
+            margin-bottom: 16px;
+            scrollbar-width: none;
+        }
+        .filter-bar::-webkit-scrollbar {
+            display: none;
+        }
+        .filter-bar .filter-btn {
+            padding: 8px 20px;
+            background: #161621;
+            border: 1px solid #26263a;
+            border-radius: 30px;
+            color: #8888aa;
+            font-size: 13px;
+            font-weight: 600;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .filter-bar .filter-btn.active {
+            background: #e94560;
+            color: #fff;
+            border-color: #e94560;
+        }
+        .filter-bar .filter-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Anime Grid */
+        .anime-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        .anime-item {
+            background: #161621;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid #1a1a2a;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .anime-item:active {
+            transform: scale(0.96);
+        }
+        .anime-item .thumb {
+            width: 100%;
+            height: 140px;
+            background: linear-gradient(135deg, #1a1a2e, #2a2a4a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            position: relative;
+        }
+        .anime-item .thumb .eps-badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: #e94560;
+            padding: 2px 10px;
+            border-radius: 30px;
+            font-size: 10px;
+            font-weight: 700;
+        }
+        .anime-item .thumb .score-badge {
+            position: absolute;
+            bottom: 8px;
+            left: 8px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 2px 10px;
+            border-radius: 30px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+        .anime-item .info {
+            padding: 10px 12px 14px;
+        }
+        .anime-item .info h4 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .anime-item .info p {
+            font-size: 11px;
+            color: #8888aa;
+        }
+        .anime-item .info .genre {
+            font-size: 10px;
+            color: #555577;
+            margin-top: 4px;
+        }
+
+        /* Bottom Nav */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #12121e;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0 14px;
+            border-top: 1px solid #26263a;
+            z-index: 999;
+        }
+        .bottom-nav a {
+            color: #555577;
+            text-align: center;
+            font-size: 11px;
+            font-weight: 500;
+            text-decoration: none;
+        }
+        .bottom-nav a .icon {
+            display: block;
+            font-size: 24px;
+            margin-bottom: 2px;
+        }
+        .bottom-nav a.active {
+            color: #e94560;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <span class="back" onclick="history.back()">‹</span>
+        <h1>📺 Daftar Anime</h1>
+        <span class="search-icon">🔍</span>
+    </div>
+
+    <div class="container">
+
+        <!-- FILTER -->
+        <div class="filter-bar">
+            <span class="filter-btn active">🔥 Terbaru</span>
+            <span class="filter-btn">⭐ Populer</span>
+            <span class="filter-btn">📺 Ongoing</span>
+            <span class="filter-btn">✅ Completed</span>
+            <span class="filter-btn">🎬 Movie</span>
+        </div>
+
+        <!-- ANIME GRID -->
+        <div class="anime-grid" id="animeList">
+            <!-- Isi dari JavaScript -->
+        </div>
+
+    </div>
+
+    <!-- BOTTOM NAV -->
+    <div class="bottom-nav">
+        <a href="index.html">
+            <span class="icon">🏠</span> Home
+        </a>
+        <a href="anime.html" class="active">
+            <span class="icon">📺</span> Anime
+        </a>
+        <a href="jadwal.html">
+            <span class="icon">📅</span> Jadwal
+        </a>
+        <a href="chat.html">
+            <span class="icon">💬</span> Chat
+        </a>
+        <a href="profil.html">
+            <span class="icon">👤</span> Profil
+        </a>
+    </div>
+
+    <script>
+        // DATA ANIME (bisa ditambah sendiri)
+        const animeData = [{
+            id: 1,
+            title: 'One Piece',
+            genre: 'Action, Adventure',
+            eps: '1175',
+            score: '9.2',
+            status: 'Ongoing',
+            link: 'https://otakudesu.org/anime/one-piece/'
+        }, {
+            id: 2,
+            title: 'Bleach',
+            genre: 'Action, Supernatural',
+            eps: '366',
+            score: '8.7',
+            status: 'Completed',
+            link: 'https://otakudesu.org/anime/bleach/'
+        }, {
+            id: 3,
+            title: 'Black Clover',
+            genre: 'Action, Magic',
+            eps: '170',
+            score: '8.0',
+            status: 'Ongoing',
+            link: 'https://otakudesu.org/anime/black-clover/'
+        }, {
+            id: 4,
+            title: 'Naruto Shippuden',
+            genre: 'Action, Adventure',
+            eps: '500',
+            score: '8.9',
+            status: 'Completed',
+            link: 'https://otakudesu.org/anime/naruto-shippuden/'
+        }, {
+            id: 5,
+            title: 'Jujutsu Kaisen',
+            genre: 'Action, Supernatural',
+            eps: '47',
+            score: '8.7',
+            status: 'Ongoing',
+            link: 'https://otakudesu.org/anime/jujutsu-kaisen/'
+        }, {
+            id: 6,
+            title: 'Demon Slayer',
+            genre: 'Action, Demons',
+            eps: '55',
+            score: '8.8',
+            status: 'Ongoing',
+            link: 'https://otakudesu.org/anime/demon-slayer/'
+        }, {
+            id: 7,
+            title: 'Attack on Titan',
+            genre: 'Action, Dark Fantasy',
+            eps: '87',
+            score: '9.1',
+            status: 'Completed',
+            link: 'https://otakudesu.org/anime/attack-on-titan/'
+        }, {
+            id: 8,
+            title: 'Spy x Family',
+            genre: 'Comedy, Action',
+            eps: '37',
+            score: '8.6',
+            status: 'Ongoing',
+            link: 'https://otakudesu.org/anime/spy-x-family/'
+        }, {
+            id: 9,
+            title: 'Solo Leveling',
+            genre: 'Action, Fantasy',
+            eps: '12',
+            score: '8.9',
+            status: 'Ongoing',
+            link: 'https://otakudesu.org/anime/solo-leveling/'
+        }, {
+            id: 10,
+            title: 'Tensei Slime',
+            genre: 'Fantasy, Isekai',
+            eps: '60',
+            score: '8.4',
+            status: 'Ongoing',
+            link: 'https://otakudesu.org/anime/tensei-shitara-slime/'
+        }, {
+            id: 11,
+            title: 'Mushoku Tensei',
+            genre: 'Fantasy, Isekai',
+            eps: '36',
+            score: '8.7',
+            status: 'Ongoing',
+            link: 'https://otakudesu.org/anime/mushoku-tensei/'
+        }, {
+            id: 12,
+            title: 'My Hero Academia',
+            genre: 'Action, Superhero',
+            eps: '138',
+            score: '8.5',
+            status: 'Ongoing',
+            link: 'https://otakudesu.org/anime/my-hero-academia/'
+        }];
+
+        // Emoji untuk thumbnail
+        const emojis = ['🏴‍☠️', '⚔️', '📖', '🍥', '👹', '🗡️', '🏰', '🤫', '⚡', '🐉', '🧙', '🦸'];
+
+        function renderAnime() {
+            const container = document.getElementById('animeList');
+            container.innerHTML = '';
+            animeData.forEach((anime, index) => {
+                const div = document.createElement('div');
+                div.className = 'anime-item';
+                div.onclick = () => {
+                    // Simpan ke histori sebelum redirect
+                    saveHistory(anime.title, anime.eps);
+                    window.open(anime.link, '_blank');
+                };
+                div.innerHTML = `
+              <div class="thumb">
+                <span>${emojis[index % emojis.length]}</span>
+                <span class="eps-badge">${anime.eps} Eps</span>
+                <span class="score-badge">⭐ ${anime.score}</span>
+              </div>
+              <div class="info">
+                <h4>${anime.title}</h4>
+                <p>${anime.status}</p>
+                <div class="genre">${anime.genre}</div>
+              </div>
+            `;
+                container.appendChild(div);
+            });
+        }
+
+        // HISTORI (disimpan di LocalStorage)
+        function saveHistory(title, eps) {
+            let history = JSON.parse(localStorage.getItem('animeHistory')) || [];
+            const entry = {
+                title: title,
+                eps: eps,
+                time: new Date().toLocaleString('id-ID'),
+                timestamp: Date.now()
+            };
+            // Cek duplikat, kalau ada update timestamp
+            const existing = history.find(h => h.title === title);
+            if (existing) {
+                existing.time = entry.time;
+                existing.timestamp = entry.timestamp;
+            } else {
+                history.unshift(entry); // tambah di awal
+            }
+            // Batasi 50 histori
+            if (history.length > 50) history = history.slice(0, 50);
+            localStorage.setItem('animeHistory', JSON.stringify(history));
+        }
+
+        renderAnime();
+    </script>
+
+</body>
+</html>
