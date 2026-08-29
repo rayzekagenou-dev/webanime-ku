@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RayzeWebAnime</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+    body {
+      background: #0b0b14;
+      color: #eee;
+      padding-bottom: 80px;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* HEADER */
+    .header {
+      background: linear-gradient(145deg, #14141f, #1a1a2e);
+      padding: 18px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #e94560;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .header h1 {
+      font-size: 22px;
+      font-weight: 800;
+    }
+    .header h1 span {
+      color: #e94560;
+    }
+    .header .badge {
+      background: #e94560;
+      padding: 4px 14px;
+      border-radius: 30px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: #fff;
+    }
+
+    /* CONTAINER */
+    .container {
+      padding: 16px 18px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* USER CARD */
+    .user-card {
+      background: #161621;
+      border-radius: 16px;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      border: 1px solid #26263a;
+      margin-bottom: 20px;
+    }
+    .user-card .avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #e94560, #ff6b6b);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: 700;
+      color: #fff;
+      flex-shrink: 0;
+    }
+    .user-card .info {
+      flex: 1;
+    }
+    .user-card .info h3 {
+      font-size: 16px;
+      font-weight: 700;
+    }
+    .user-card .info p {
+      font-size: 12px;
+      color: #8888aa;
+    }
+    .user-card .premium-badge {
+      background: #00d4ff;
+      color: #000;
+      padding: 4px 14px;
+      border-radius: 30px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+      box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+    }
+    .user-card .admin-badge {
+      background: #ff1744;
+      color: #fff;
+      padding: 4px 14px;
+      border-radius: 30px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+      box-shadow: 0 0 15px rgba(255, 23, 68, 0.4);
+      margin-right: 6px;
+    }
+
+    /* SECTION */
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 24px 0 12px 0;
+    }
+    .section-title h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #e94560;
+    }
+    .section-title a {
+      color: #8888aa;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    /* LEADERBOARD */
+    .lb-item {
+      display: flex;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid #1a1a2a;
+      font-size: 14px;
+    }
+    .lb-item .rank-lb {
+      color: #ffd93d;
+      font-weight: 700;
+      min-width: 36px;
+      font-size: 15px;
+    }
+    .lb-item .name-lb {
+      flex: 1;
+      margin-left: 6px;
+      font-weight: 500;
+    }
+    .lb-item .lv-lb {
+      color: #8888aa;
+      font-size: 12px;
+      background: #1a1a2a;
+      padding: 2px 12px;
+      border-radius: 30px;
+    }
+
+    /* ANIME CARD */
+    .anime-card {
+      background: #161621;
+      border-radius: 14px;
+      padding: 14px 16px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      border-left: 4px solid #e94560;
+      transition: 0.2s;
+    }
+    .anime-card:active {
+      transform: scale(0.98);
+    }
+    .anime-card .rank {
+      font-size: 20px;
+      font-weight: 800;
+      color: #ffd93d;
+      min-width: 32px;
+    }
+    .anime-card .info {
+      flex: 1;
+    }
+    .anime-card .info h4 {
+      font-size: 15px;
+      font-weight: 600;
+    }
+    .anime-card .info p {
+      font-size: 12px;
+      color: #8888aa;
+    }
+    .anime-card .info .eps {
+      font-size: 11px;
+      color: #555577;
+      margin-top: 2px;
+    }
+    .anime-card .score {
+      background: #e94560;
+      padding: 4px 12px;
+      border-radius: 30px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    /* COMING SOON */
+    .coming-soon {
+      background: #161621;
+      border-radius: 16px;
+      padding: 30px 20px;
+      text-align: center;
+      border: 2px dashed #26263a;
+      margin: 24px 0;
+    }
+    .coming-soon h3 {
+      color: #e94560;
+      margin-bottom: 8px;
+      font-size: 18px;
+    }
+    .coming-soon p {
+      color: #8888aa;
+      font-size: 13px;
+    }
+    .coming-soon .dev {
+      margin-top: 10px;
+      font-size: 12px;
+      color: #555577;
+    }
+
+    /* BOTTOM NAV */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #12121e;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0 14px;
+      border-top: 1px solid #26263a;
+      z-index: 999;
+    }
+    .bottom-nav a {
+      color: #555577;
+      text-align: center;
+      font-size: 11px;
+      font-weight: 500;
+      transition: 0.2s;
+    }
+    .bottom-nav a .icon {
+      display: block;
+      font-size: 24px;
+      margin-bottom: 2px;
+    }
+    .bottom-nav a.active {
+      color: #e94560;
+    }
+
+    .footer-text {
+      text-align: center;
+      color: #333355;
+      font-size: 11px;
+      margin-top: 16px;
+      padding-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <div class="header">
+    <h1>Rayze<span>WebAnime</span></h1>
+    <span class="badge">🔥 BETA</span>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="container">
+
+    <!-- USER CARD -->
+    <div class="user-card">
+      <div class="avatar">R</div>
+      <div class="info">
+        <h3>Rayze ✨ ライゼ</h3>
+        <p>#777837 · Lvl. 334</p>
+      </div>
+      <div>
+        <span class="admin-badge">👑 ADMIN</span>
+        <span class="premium-badge">⭐ PREMIUM</span>
+      </div>
+    </div>
+
+    <!-- LEADERBOARD -->
+    <div class="section-title">
+      <h2>🏆 TOP LEADERBOARD</h2>
+      <a href="#">Lihat Semua</a>
+    </div>
+
+    <div class="lb-item">
+      <span class="rank-lb">#1</span>
+      <span class="name-lb">flyCienu.</span>
+      <span class="lv-lb">Lvl 5.2K</span>
+    </div>
+    <div class="lb-item">
+      <span class="rank-lb">#2</span>
+      <span class="name-lb">Maōu Dan</span>
+      <span class="lv-lb">Lvl 4.8K</span>
+    </div>
+    <div class="lb-item">
+      <span class="rank-lb">#3</span>
+      <span class="name-lb">nop</span>
+      <span class="lv-lb">Lvl 3.9K</span>
+    </div>
+    <div class="lb-item">
+      <span class="rank-lb">#4</span>
+      <span class="name-lb">Ranss</span>
+      <span class="lv-lb">Lvl 3.2K</span>
+    </div>
+    <div class="lb-item">
+      <span class="rank-lb">#5</span>
+      <span class="name-lb">flyKing</span>
+      <span class="lv-lb">Lvl 2.9K</span>
+    </div>
+
+    <!-- POPULAR ANIME -->
+    <div class="section-title">
+      <h2>🔥 Popular Anime</h2>
+      <a href="#">Lihat Semua</a>
+    </div>
+
+    <div class="anime-card">
+      <div class="rank">1</div>
+      <div class="info">
+        <h4>One Piece</h4>
+        <p>Petualangan Luffy jadi Raja Bajak Laut</p>
+        <div class="eps">1175 Eps · Ongoing</div>
+      </div>
+      <div class="score">⭐ 9.2</div>
+    </div>
+
+    <div class="anime-card">
+      <div class="rank">2</div>
+      <div class="info">
+        <h4>Bleach</h4>
+        <p>Petualangan Ichigo menjadi Shinigami</p>
+        <div class="eps">366 Eps · Completed</div>
+      </div>
+      <div class="score">⭐ 8.7</div>
+    </div>
+
+    <div class="anime-card">
+      <div class="rank">3</div>
+      <div class="info">
+        <h4>Black Clover</h4>
+        <p>Petualangan Asta jadi Magic Emperor</p>
+        <div class="eps">170 Eps · Ongoing</div>
+      </div>
+      <div class="score">⭐ 8.0</div>
+    </div>
+
+    <div class="anime-card">
+      <div class="rank">4</div>
+      <div class="info">
+        <h4>Naruto Shippuden</h4>
+        <p>Kisah ninja dari desa Konoha</p>
+        <div class="eps">500 Eps · Completed</div>
+      </div>
+      <div class="score">⭐ 8.9</div>
+    </div>
+
+    <div class="anime-card">
+      <div class="rank">5</div>
+      <div class="info">
+        <h4>Jujutsu Kaisen</h4>
+        <p>Pertarungan melawan kutukan</p>
+        <div class="eps">47 Eps · Ongoing</div>
+      </div>
+      <div class="score">⭐ 8.7</div>
+    </div>
+
+    <!-- COMING SOON -->
+    <div class="coming-soon">
+      <h3>⚡ Fitur Lainnya Segera Hadir</h3>
+      <p>Login, Premium, Chat, Riwayat &amp; lainnya</p>
+      <div class="dev">Developer: Rayze ✨</div>
+    </div>
+
+    <div class="footer-text">© 2026 RayzeWebAnime · Made with ❤️</div>
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <div class="bottom-nav">
+    <a href="#" class="active">
+      <span class="icon">🏠</span> Home
+    </a>
+    <a href="#">
+      <span class="icon">🔍</span> Cari
+    </a>
+    <a href="#">
+      <span class="icon">📅</span> Jadwal
+    </a>
+    <a href="#">
+      <span class="icon">💬</span> Chat
+    </a>
+    <a href="#">
+      <span class="icon">👤</span> Profil
+    </a>
+  </div>
+
+</body>
+</html>
