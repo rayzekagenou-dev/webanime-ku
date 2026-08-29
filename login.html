@@ -77,17 +77,12 @@
       font-weight: 700;
       cursor: pointer;
       transition: 0.2s;
+      margin-bottom: 10px;
     }
     .login-box .btn-login:active {
       transform: scale(0.97);
     }
-    .login-box .divider {
-      text-align: center;
-      color: #555577;
-      font-size: 13px;
-      margin: 18px 0;
-    }
-    .login-box .btn-google {
+    .login-box .btn-register {
       width: 100%;
       padding: 14px;
       background: #1a1a2e;
@@ -98,16 +93,15 @@
       font-weight: 600;
       cursor: pointer;
       transition: 0.2s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
     }
-    .login-box .btn-google:active {
+    .login-box .btn-register:active {
       transform: scale(0.97);
     }
-    .login-box .btn-google img {
-      width: 22px;
+    .login-box .divider {
+      text-align: center;
+      color: #555577;
+      font-size: 13px;
+      margin: 16px 0;
     }
     .login-box .tester {
       text-align: center;
@@ -118,6 +112,7 @@
     .login-box .tester a {
       color: #e94560;
       font-weight: 600;
+      cursor: pointer;
     }
     .login-box .terms {
       text-align: center;
@@ -126,8 +121,25 @@
       margin-top: 20px;
       line-height: 1.6;
     }
-    .login-box .terms a {
-      color: #8888aa;
+    .msg {
+      padding: 10px;
+      border-radius: 10px;
+      margin-bottom: 14px;
+      font-size: 13px;
+      font-weight: 600;
+      display: none;
+    }
+    .msg.error {
+      background: #ff174422;
+      color: #ff1744;
+      border: 1px solid #ff1744;
+      display: block;
+    }
+    .msg.success {
+      background: #00d4ff22;
+      color: #00d4ff;
+      border: 1px solid #00d4ff;
+      display: block;
     }
   </style>
 </head>
@@ -139,24 +151,21 @@
       <p>Platform anime untuk komunitas Indonesia</p>
     </div>
 
-    <form id="loginForm">
-      <label>Username</label>
-      <input type="text" id="username" placeholder="Masukkan username" />
+    <div id="message" class="msg"></div>
 
-      <label>Password</label>
-      <input type="password" id="password" placeholder="Masukkan password" />
+    <label>Username</label>
+    <input type="text" id="username" placeholder="Masukkan username" />
 
-      <button type="button" class="btn-login" onclick="login()">🚀 Masuk</button>
-    </form>
+    <label>Password</label>
+    <input type="password" id="password" placeholder="Masukkan password" />
+
+    <button class="btn-login" onclick="login()">🚀 Masuk</button>
+    <button class="btn-register" onclick="register()">📝 Buat Akun Baru</button>
 
     <div class="divider">atau</div>
 
-    <button class="btn-google" onclick="loginGoogle()">
-      <span style="font-size:20px;">🔵</span> Lanjut dengan Google
-    </button>
-
     <div class="tester">
-      <a href="#" onclick="testerLogin()">Masuk sebagai Tester</a>
+      <a onclick="testerLogin()">Masuk sebagai Tester</a>
     </div>
 
     <div class="terms">
@@ -166,30 +175,132 @@
   </div>
 
   <script>
-    function login() {
-      const user = document.getElementById('username').value;
-      const pass = document.getElementById('password').value;
+    // Ambil data user dari LocalStorage
+    function getUsers() {
+      return JSON.parse(localStorage.getItem('users')) || [];
+    }
 
-      if (user === 'admin' && pass === 'admin') {
-        alert('✅ Login sebagai ADMIN!');
-        window.location.href = 'admin.html';
-      } else if (user === 'rayze' && pass === 'rayze') {
-        alert('✅ Login sebagai PREMIUM!');
-        window.location.href = 'profil.html';
+    function saveUsers(users) {
+      localStorage.setItem('users', JSON.stringify(users));
+    }
+
+    function showMessage(text, type) {
+      const msg = document.getElementById('message');
+      msg.textContent = text;
+      msg.className = 'msg ' + type;
+    }
+
+    function login() {
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      if (!username || !password) {
+        showMessage('❌ Isi username dan password!', 'error');
+        return;
+      }
+
+      const users = getUsers();
+      const user = users.find(u => u.username === username && u.password === password);
+
+      if (user) {
+        // Simpan user yang login
+        localStorage.setItem('currentUser', JSON.stringify({
+          name: user.displayName || user.username,
+          tag: user.tag || '#000000',
+          avatar: user.avatar || user.username.charAt(0).toUpperCase(),
+          isAdmin: user.isAdmin || false,
+          isPremium: user.isPremium || false,
+          username: user.username
+        }));
+        showMessage('✅ Login berhasil!', 'success');
+        setTimeout(() => {
+          window.location.href = 'index.html';
+        }, 500);
       } else {
-        alert('❌ Username atau password salah!');
+        showMessage('❌ Username atau password salah!', 'error');
       }
     }
 
-    function loginGoogle() {
-      alert('🔵 Login dengan Google (coming soon)');
+    function register() {
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      if (!username || !password) {
+        showMessage('❌ Isi username dan password!', 'error');
+        return;
+      }
+
+      if (username.length < 3) {
+        showMessage('❌ Username minimal 3 karakter!', 'error');
+        return;
+      }
+
+      if (password.length < 3) {
+        showMessage('❌ Password minimal 3 karakter!', 'error');
+        return;
+      }
+
+      let users = getUsers();
+
+      // Cek duplikat
+      if (users.find(u => u.username === username)) {
+        showMessage('❌ Username sudah dipakai!', 'error');
+        return;
+      }
+
+      // Tambah user baru
+      users.push({
+        username: username,
+        password: password,
+        displayName: username,
+        tag: '#' + Math.floor(Math.random() * 900000 + 100000),
+        avatar: username.charAt(0).toUpperCase(),
+        isAdmin: false,
+        isPremium: false
+      });
+
+      saveUsers(users);
+      showMessage('✅ Akun berhasil dibuat! Silakan login.', 'success');
+
+      // Kosongkan password
+      document.getElementById('password').value = '';
     }
 
     function testerLogin() {
-      alert('✅ Login sebagai Tester!');
+      // Cek apakah user tester sudah ada
+      let users = getUsers();
+      let tester = users.find(u => u.username === 'tester');
+
+      if (!tester) {
+        tester = {
+          username: 'tester',
+          password: 'tester',
+          displayName: 'Tester',
+          tag: '#999999',
+          avatar: 'T',
+          isAdmin: false,
+          isPremium: false
+        };
+        users.push(tester);
+        saveUsers(users);
+      }
+
+      localStorage.setItem('currentUser', JSON.stringify({
+        name: tester.displayName,
+        tag: tester.tag,
+        avatar: tester.avatar,
+        isAdmin: tester.isAdmin,
+        isPremium: tester.isPremium,
+        username: tester.username
+      }));
+
+      window.location.href = 'index.html';
+    }
+
+    // Cek apakah sudah login, redirect ke home
+    if (localStorage.getItem('currentUser')) {
       window.location.href = 'index.html';
     }
   </script>
-
 </body>
-</html>
+      </html>
