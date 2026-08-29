@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat - RayzeWebAnime</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+        body {
+            background: #0b0b14;
+            color: #eee;
+            padding-bottom: 80px;
+        }
+        .header {
+            background: linear-gradient(145deg, #14141f, #1a1a2e);
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 2px solid #e94560;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        .header .back {
+            font-size: 24px;
+            color: #fff;
+            cursor: pointer;
+        }
+        .header h1 {
+            font-size: 20px;
+            font-weight: 700;
+        }
+        .container {
+            padding: 16px 18px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .chat-item {
+            background: #161621;
+            border-radius: 12px;
+            padding: 14px 16px;
+            margin-bottom: 10px;
+            border: 1px solid #1a1a2a;
+        }
+        .chat-item .user {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 6px;
+        }
+        .chat-item .user .avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #2a2a4a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        .chat-item .user .name {
+            font-weight: 600;
+            font-size: 14px;
+        }
+        .chat-item .user .tag {
+            color: #8888aa;
+            font-size: 11px;
+        }
+        .chat-item .user .level {
+            background: #1a1a2a;
+            padding: 2px 10px;
+            border-radius: 30px;
+            font-size: 10px;
+            font-weight: 600;
+            margin-left: auto;
+        }
+        .chat-item .message {
+            font-size: 14px;
+            color: #ccc;
+            padding-left: 46px;
+        }
+        .chat-item .time {
+            font-size: 11px;
+            color: #555577;
+            padding-left: 46px;
+            margin-top: 4px;
+        }
+
+        .chat-input {
+            position: fixed;
+            bottom: 70px;
+            left: 0;
+            right: 0;
+            padding: 10px 18px;
+            background: #12121e;
+            border-top: 1px solid #26263a;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+        .chat-input input {
+            flex: 1;
+            padding: 12px 16px;
+            background: #0b0b14;
+            border: 1px solid #26263a;
+            border-radius: 30px;
+            color: #fff;
+            font-size: 14px;
+            outline: none;
+        }
+        .chat-input input:focus {
+            border-color: #e94560;
+        }
+        .chat-input button {
+            padding: 12px 20px;
+            background: #e94560;
+            border: none;
+            border-radius: 30px;
+            color: #fff;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .chat-input button:active {
+            transform: scale(0.95);
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #12121e;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0 14px;
+            border-top: 1px solid #26263a;
+            z-index: 999;
+        }
+        .bottom-nav a {
+            color: #555577;
+            text-align: center;
+            font-size: 11px;
+            font-weight: 500;
+            text-decoration: none;
+        }
+        .bottom-nav a .icon {
+            display: block;
+            font-size: 24px;
+            margin-bottom: 2px;
+        }
+        .bottom-nav a.active {
+            color: #e94560;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <span class="back" onclick="history.back()">‹</span>
+        <h1>💬 Chat & Diskusi</h1>
+    </div>
+
+    <div class="container" id="chatContainer">
+        <!-- Isi dari JavaScript -->
+    </div>
+
+    <div class="chat-input">
+        <input type="text" id="chatInput" placeholder="Ketik pesan..." />
+        <button onclick="sendMessage()">Kirim</button>
+    </div>
+
+    <div class="bottom-nav">
+        <a href="index.html">
+            <span class="icon">🏠</span> Home
+        </a>
+        <a href="anime.html">
+            <span class="icon">📺</span> Anime
+        </a>
+        <a href="jadwal.html">
+            <span class="icon">📅</span> Jadwal
+        </a>
+        <a href="chat.html" class="active">
+            <span class="icon">💬</span> Chat
+        </a>
+        <a href="profil.html">
+            <span class="icon">👤</span> Profil
+        </a>
+    </div>
+
+    <script>
+        const users = [
+            { name: 'Rayze ✨ ライゼ', tag: '#777837', level: 'Lvl. 334', avatar: 'R', color: '#e94560' },
+            { name: 'flyCienu.', tag: '#102938', level: 'Lvl. 5.2K', avatar: 'F', color: '#ffd93d' },
+            { name: 'Maōu Dan', tag: '#203948', level: 'Lvl. 4.8K', avatar: 'M', color: '#00d4ff' },
+            { name: 'nop', tag: '#304857', level: 'Lvl. 3.9K', avatar: 'N', color: '#4ecdc4' },
+            { name: 'Ranss', tag: '#405867', level: 'Lvl. 3.2K', avatar: 'R', color: '#ff6b6b' },
+            { name: 'flyKing', tag: '#506978', level: 'Lvl. 2.9K', avatar: 'F', color: '#f9ca24' },
+        ];
+
+        let chatMessages = JSON.parse(localStorage.getItem('chatMessages')) || [];
+
+        function renderChat() {
+            const container = document.getElementById('chatContainer');
+            if (chatMessages.length === 0) {
+                container.innerHTML = `
+              <div style="text-align:center;padding:40px 0;color:#555577;">
+                <div style="font-size:48px;">💬</div>
+                <p style="margin-top:10px;">Belum ada pesan. Mulai diskusi!</p>
+              </div>
+            `;
+                return;
+            }
+            container.innerHTML = '';
+            chatMessages.forEach(msg => {
+                const user = users.find(u => u.name === msg.user) || users[0];
+                const div = document.createElement('div');
+                div.className = 'chat-item';
+                div.innerHTML = `
+              <div class="user">
+                <div class="avatar" style="background:${user.color};">${user.avatar}</div>
+                <span class="name">${msg.user}</span>
+                <span class="tag">${user.tag}</span>
+                <span class="level">${user.level}</span>
+              </div>
+              <div class="message">${msg.text}</div>
+              <div class="time">${msg.time}</div>
+            `;
+                container.appendChild(div);
+            });
+            // Scroll ke bawah
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const text = input.value.trim();
+            if (!text) return;
+
+            chatMessages.push({
+                user: 'Rayze ✨ ライゼ',
+                text: text,
+                time: new Date().toLocaleString('id-ID')
+            });
+
+            localStorage.setItem('chatMessages', JSON.stringify(chatMessages));
+            input.value = '';
+            renderChat();
+        }
+
+        // Enter key
+        document.getElementById('chatInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') sendMessage();
+        });
+
+        renderChat();
+    </script>
+
+</body>
+</html>
